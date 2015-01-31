@@ -1,0 +1,45 @@
+/* 
+    Document   : lugar
+    Created on : 19/03/2012, 19:40:05
+    Author     : Luiz Carlos
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+#comentario
+{
+    background-color: #EBF3EC;
+    color: #005702;
+}
+#descricao
+{
+    background-color: #4F5155;
+    color: #00620C;
+}
+#descricao, #comentario
+{
+    background: #F5F5F5;
+    width: 500px;
+    height: 100px;
+    top: 100px;
+    float: left;
+    margin-left: 20px;
+  
+    
+}
+#comentario
+{
+    position: relative;
+    top: 110px;
+    left: -520px;
+    height: 180px;
+}
+

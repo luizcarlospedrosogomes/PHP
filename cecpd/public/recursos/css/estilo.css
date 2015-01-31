@@ -1,0 +1,34 @@
+@charset "utf-8";
+/* Getting the new tags to behave */
+#pagina{width: 100%;}
+header{margin-bottom: 2px;height: 80px }
+header h1{float:left;display:block; width: 500px}
+header a{ float:right; table; margin:0 15px 15px 0}
+h2{font-size:15px}
+
+.editar button{margin-top:15px}
+
+nav{height: 40px; padding: 0 35px 35px 0; margin-left:25%; }
+nav ul{list-style: none;  font-size: 30px; margin: 0 35px 35px 0; padding: 0 35px 35px 0}
+nav ul li{display: block;float: left; margin: 10px 20px 20px 0;}
+nav ul li a{text-decoration: none; color: graytext;}
+nav ul li:HOVER {background: #0000FF;}
+nav ul li a:HOVER{color: white;}
+
+#logout{margin-left: 80%}
+.tabelas, .colunas, .linhas{border: solid 1px}
+#menu_saida{width: 100px; float: left}
+#bt_geraOS{float: left;display: table;}
+ordemPendentes{margin-left: 15%; padding: 0}
+
+#tab_saida{margin-left: 0px}
+#sobre{width: 100%}
+
+#sobre #tecnologias{width: 100%; height: 300px}
+#sobre #tecnologias #php, #mysql{float: left;}
+#tecnologias{margin-left: 30%}
+#sobre #tecnologias h2{margin-left: 100px; color: #6495ED}
+#code{margin-left: 60px; width: 200px}
+#code, #php, #mysql{border: solid 3px #6495ED; border-radius: 5px}
+#php p{margin-left: 55px}
+#code p, #mysql p{margin-left: 25px}

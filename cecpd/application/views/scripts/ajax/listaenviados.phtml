@@ -1,0 +1,114 @@
+   <table border="1px" id="tab_saida">
+        <tr>
+            <td>Filial</td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/centroCusto.png');?>" title="Centro de Custo" /></td>
+            <td>Equipamento</td>
+            <td>Marca</td>
+            <td>Qtd</td>
+            <td>Situacao</td>
+            <td>Observacao</td>
+            <td>Tecnico Resp.</td>
+            <td>Data Criacao</td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/update.png');?>" title="Atualizado em:" width="36"/></td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/editar.png');?>" title="Editar" width="24"/></td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/email.png');?>" title="Enviar email"/></td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/delete.png');?>" title="Excluir"/></td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/pdf.gif');?>" title="Etiqueta" /></td>
+            <td><img src="<?php echo $this->baseUrl('recursos/imagens/impre.png');?>" title="Imprimir" /></td>
+
+        </tr>
+    <?php foreach ($this->verSituacao as $objs)
+        
+    { //var_dump($objs);  ?>
+        <script type="text/javascript">
+       $(document).ready(function() {	
+	$('#editar<?php echo $objs['id']?>').click(function(){
+	//alert('ok');
+		$('#editar').dialog('open').dialog({
+			width:"20%"
+		});
+
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'saida','action'=>'ajaxeditar')); ?>',
+			data : 'id='+$('#id<?php echo $objs['id'];?>').val(),
+			dataType :'html',
+			success :function(resposta){
+				
+				$('#editar').html(resposta);
+			}
+				});
+
+		});
+              
+           $('#email<?php echo $objs['id']?>').click(function(){
+               $('#notificacao').dialog('open').dialog({
+			width:"20%"
+		});
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'notificacao','action'=>'ordememail')); ?>',
+			data : 'id='+$('#id<?php echo $objs['id'];?>').val(),
+			dataType :'html',
+			success :function(resposta){
+				
+				$('#notificacao').html(resposta);
+			}
+				});
+                });
+
+		
+});
+</script>
+        <tr>
+            <td><?php if(isset($objs['flnome'])){ echo $objs['numero']."-". $objs['flnome'];}?></td>
+            <td><?php if(isset($objs['centrodecusto'])){ echo $objs['centrodecusto'];}?></td>
+            <td><?php if(isset($objs['equipnome'])){ echo $objs['equipnome'];}?></td>
+            <td><?php if(isset($objs['marca'])){ echo $objs['marca'];}?></td>
+            <td><?php if(isset($objs['quantidade'])){echo $objs['quantidade'];} ?></td>
+            <td><?php if(isset($objs['flnome'])){
+          switch ($objs['situacao']) {
+         case  1: echo "<span style='background:red'>Pendente</span>";
+             break;
+         case  2: echo "<span style='background:yellow'>Aguardando NF</span>";
+             break;
+         case  3: echo  "<span style='background:green'>Enviado</span>";
+             break;
+         case  4: echo 'Indisponivel';       
+
+         default:
+             break;
+     }}?></td>
+            <td><?php if(isset($objs['obs'])){ echo substr($objs['obs'], 0,10);}?></td>
+            <td><?php if(isset($objs['user'])){ echo $objs['user'];}?></td>
+            <td><?php if(isset($objs['datacriacao'])){ echo date('d/m/Y',$objs['datacriacao']);}?></td>
+            <td><?php if(isset($objs['dataedicao'])){ echo $objs['dataedicao'];}?></td>
+            
+             <td><button id="editar<?php echo $objs['id']?>"><img src="<?php echo $this->baseUrl('recursos/imagens/editar.png');?>" title="Editar" width="24"/></button></td>
+             
+            <td><button id="email<?php echo $objs['id']?>"><img src="<?php echo $this->baseUrl('recursos/imagens/email.png');?>" title="Editar" width="24"/></button></td>
+           
+           
+            <td><?php if(isset($objs['flnome'])){
+                echo '<a href='.$this->url(array('controller'=>'saida','action'=>'excluir','id'=>$objs['id'])).'>
+                    <img src="recursos/imagens/delete.png"  title="Excluir"/></a>'; 
+                
+                    }?>
+            </td>
+             <td><?php if(isset($objs['flnome'])){
+                 echo '<a href='.$this->url(array('controller'=>'Gerapdf','action'=>'index','id'=>$objs['id'])).' target="_blank">
+                 <img src="recursos/imagens/pdf.gif" title="Etiqueta"/></a>';
+                 }?>
+             </td>
+             <td><?php if(isset($objs['flnome'])){
+                 echo '<a href='.$this->url(array('controller'=>'Gerapdf','action'=>'ordem','id'=>$objs['id'])).' target="_blank">
+                 <img src="'.$this->baseUrl('recursos/imagens/pdf.gif').'" title="Ordem de Saida"/></a>';
+                 }?>
+             </td>
+        </tr>
+        
+        <input type="hidden" name="id" value="<?php echo $objs['id']?>" id="id<?php echo $objs['id']?>"/>	
+        
+  <?php }?>
+   </table>
+ 

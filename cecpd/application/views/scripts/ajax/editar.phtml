@@ -1,0 +1,38 @@
+<form action="<?php echo $this->url(array('controller'=>'Ajax','action'=>'updatependencias'));?>" method="post" title="Emprestimos Equipamentos CDAM"  class="modal" id="pendcdam">
+
+	<label for="matricula">Matricula</label>
+	<input id="matricula" name="matricula" type="number" value="<?php echo $this->ver['matricula']?>"/>
+	
+	<label for="nome">Nome</label>
+	<input id="nome" name="nome" type="text" value="<?php echo $this->ver['nome']?>"/>
+	
+	<label for="setor">Setor</label>
+	<input id="setor" name="setor" type="text" value="<?php echo $this->ver['setor']?>"/>
+	
+	<label for="email">Email</label>
+	<input id="email" name="email" type="email" value="<?php echo $this->ver['email']?>"/>
+	
+	<label for="equip">Equipamento</label>
+	<input id="equip" name="equip" type="text" value="<?php echo $this->ver['equipamento']?>"/>
+	
+	<label for="estado" >Condicoes</label>
+	<select name="estado">
+		<option name="estado"  value="1">Bom
+		<option  value="2">Ruim	
+	</select>
+	<label for="situacao" >Situacao</label>
+	<select name="situacao">
+		<option name="situacao"  value="1">Pendente
+		<option  value="2">Devolvido	
+	</select>
+ 	<label for="dataDevolucao">Data Para a Devolucao</label>
+	<input id="dataDevolucao" name="dataDevolucao" type="date" />
+	
+	<input type="hidden" value="<?php echo $this->ver['id']?>" name="id"/>
+	
+	<textarea rows="3" cols="15" name="obs"><?php echo $this->ver['obs']?></textarea>
+
+	<input type="submit" value="Modificar"/>
+		
+
+</form>

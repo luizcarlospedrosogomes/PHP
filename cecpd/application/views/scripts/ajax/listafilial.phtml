@@ -1,0 +1,19 @@
+<table border="1px">			
+<tr>
+<th>Nome</th>
+<th>Numero</th>
+<th><img src="<?php echo $this->baseUrl('recursos/imagens/delete.png');?>" title="Excluir"/></th>
+
+</tr>
+<?php foreach ($this->filiais as $ls)
+{//var_dump($ls)?>
+<tr>
+<td><?php if(isset($ls['nome'])){ echo $ls['nome'];}?></td>
+<td><?php if(isset($ls['numero'])){ echo $ls['numero'];}?></td>
+<td><?php if(isset($ls['id'])){
+    echo '<a href='.$this->url(array('controller'=>'Ajax','action'=>'excluirfilial','id'=>$ls['id'])).'><img src="'.$this->baseUrl('recursos/imagens/delete.png').'" title="Excluir"/></a>'; }?>
+</td>
+
+<?php }?>
+</tr>
+</table>

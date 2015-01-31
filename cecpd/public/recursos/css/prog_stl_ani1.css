@@ -1,0 +1,30 @@
+html { 
+		overflow: hidden; 
+	} 
+ 
+	
+	#screen { 
+		position: absolute; 
+		background: #666; 
+		left: 60px; 
+		top: 300px; 
+		height:300px;
+		width:600px;
+		overflow: hidden; 
+	} 
+	#screen div { 
+		position: absolute; 
+		font-size: 0px; 
+		width: 0px; 
+		height: 0px; 
+		border-width: 0px; 
+		border-style: solid; 
+		border-color: #000; 
+		border-top-color: transparent; 
+	} 
+	#screen img { 
+		position: absolute; 
+		left: -10000px; 
+	} 
+	#slim{
+		}

@@ -1,0 +1,34 @@
+<form  title="Gerar Ordem de Servico" method="post" action="<?php echo $this->url(array('controller'=>'Saida','action'=>'updateos'));?>">
+    
+    <label for="filial">Filial</label>
+    <input type="number" id="filial" name="filial" value="<?php echo $this->listar['numero']."-".$this->listar['flnome']?>"/>
+    
+    <label for="centroDeCusto">Centro de Custo</label>
+    <input type="number" id="centroDeCusto" name="centroDeCusto" value="<?php echo $this->listar['centrodecusto']?>"/>
+    
+    <label for="equipamento">Equipamento</label>
+    <input type="text" id="equipamento" name="equipamento" value="<?php echo $this->listar['equipnome']?>"/>
+    
+    <label for="marca">Marca</label>
+    <input type="text" id="marca" name="marca" value="<?php echo $this->listar['marca']?>"/>
+   
+    <label for="quantidade">Quantidade</label>
+    <input type="text" id="quantidade" name="quantidade" value="<?php if(isset($this->listar['quantidade'])){ echo $this->listar['quantidade'];}?>"/>
+    
+    <label for="obs">OBS</label><br>
+    <textarea  id="obs"cols="15" rows="3" name="obs" ><?php if(isset($this->listar['obs'])){ echo $this->listar['obs'];}?></textarea>
+    
+    <select name="situacao">
+            <option value="1">Pendente</option>
+            <option value="2">Aguardando NF</option>
+            <option value="3">Enviado</option>
+            <option value="4">Indisponivel</option>
+    </select>
+    
+    <input type="hidden" value="<?php echo $this->listar['user'];?>" name="usuario"/>
+    <input type="hidden" value="<?php echo $this->listar['idordem'];?>" name="id"/>
+    <input type="hidden" value="<?php echo $this->listar['datacriacao'];?>" name="dataCriacao"/>
+    <input type="submit" value="Editar OS" />
+    
+   
+</form>

@@ -1,0 +1,131 @@
+
+
+<h2>Pendencias</h2>
+<div id="bts_pendencias">
+	<button id="bt_pendcdam">Emprestimos CDAM</button>
+	<button id="bt_pendfl">Emprestimos Filiais</button>
+</div>
+
+<div id="pendCdam">
+	<h3>Pendencias CDAM</h3>
+<table border="1px">			
+<tr>
+<th>Matricula</th>
+<th>Nome</th>
+<th>Setor</th>
+<th>Email</th>
+<th>Situcao</th>
+<th>Data de Devolucao</th>
+<th>Excluir</th>
+<th>Imprimir</th>
+<th>Editar</th>
+</tr>
+<?php foreach ($this->listmongo as $ls)
+			{//var_dump($ls)?>
+<script type="text/javascript">
+       $(document).ready(function() {	
+	$('#editar<?php echo $ls['id']?>').click(function(){
+	//alert('ok');
+		$('#editar').dialog('open').dialog({
+			width:"20%"
+		});
+
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'editar')); ?>',
+			data : 'id='+$('#id<?php echo $ls['id'];?>').val(),
+			dataType :'html',
+			success :function(resposta){
+				
+				$('#editar').html(resposta);
+			}
+				});
+
+		});	
+});
+</script>
+<tr>
+<td><?php if(isset($ls['matricula'])){ echo $ls['matricula'];}?></td>
+<td><?php if(isset($ls['nome'])){ echo $ls['nome'];}?></td>
+<td><?php if(isset($ls['setor'])){ echo $ls['setor'];}?></td>
+<td><?php if(isset($ls['email'])){ echo $ls['email'];}?></td>
+
+<?php 
+    $dataSis =  strtotime(date('d-m-y'));
+    //$dataDb  = strtotime();
+?>
+
+<td><?php if(isset($ls['situacao'])){if($dataSis > $ls['datadevolucao']){echo "<span style='background:red'>Atrasado</span>";}else {echo "<span style='background:green'>Pedente</span>";  }}?></td>
+<td><?php if(isset($ls['datadevolucao'])){ echo date('d-m-Y',$ls['datadevolucao']);}?></td>
+
+<td><?php if(isset($ls['id'])){echo '<a href='.$this->url(array('controller'=>'Pendencias','action'=>'excluir','id'=>$ls['id'])).'>Excluir</a>'; }?></td>
+
+<td><?php echo '<a href='.$this->url(array('controller'=>'Gerapdf','action'=>'pendencias','id'=>$ls['id'])).'>
+    <img src="recursos/imagens/pdf.gif" title="Imprimir"/></a>';?></td>
+
+<td><button id="editar<?php echo $ls['id']?>">Editar</button></td>
+
+<input type="hidden" name="id" value="<?php echo $ls['id']?>" id="id<?php echo $ls['id']?>"/>	
+<?php }?>
+</tr>
+</table>
+        
+<div id="editar" class="modal"></div>				
+				
+</div>
+
+<div id="pendFiliais">
+	<h4>Pendencias Filiais</h4>
+</div>
+
+<form action="<?php echo $this->url(array('controller'=>'Pendencias','action'=>'pendcdam'));?>" method="post" title="Emprestimos Equipamentos CDAM"  class="modal" id="pendcdam">
+<small>* Obrigatorio</small><br>
+	<label for="matricula">Matricula *</label>
+	<input id="matricula" name="matricula" type="number" required="required"/>
+	
+	<label for="nome">Nome *</label>
+	<input id="nome" name="nome" type="text" required="required"/>
+	
+	<label for="setor">Setor *</label>
+	<input id="setor" name="setor" type="text" required="required"/>
+	
+	<label for="email">Email *</label>
+	<input id="email" name="email" type="email" required="required"/>
+	
+	<label for="equip">Equipamento *</label>
+	<input id="equip" name="equip" type="text" required="required"/>
+	
+	<label for="estado" >Condicoes</label>
+	<select name="estado">
+		<option name="estado"  value="1">Bom
+		<option  value="2">Ruim	
+	</select>
+	
+ 	<label for="dataDevolucao">Data Para a Devolucao</label>
+        <input id="dataDevolucao" name="dataDevolucao" type="date"/>
+	
+	
+	<textarea rows="3" cols="15" name="obs"></textarea>
+	
+	<input type="submit" value="Registrar"/>
+		
+</form>
+
+<form class="modal" id="pendfl">
+	
+	<label for="filial">Filial</label>
+	<input id="filial" name="filial" type="number"/>
+	
+	<label for="equip">Equipamento</label>
+	<input id="equip" name="equip" type="text"/>
+	
+	<label for="estado">Condicoes</label>
+	<select>
+		<option value="1">Bom
+		<option value="2">Ruim	
+	</select>
+	
+	<textarea rows="3" cols="15"></textarea>
+	
+	<input type="submit" value="Registrar"/>	
+</form>

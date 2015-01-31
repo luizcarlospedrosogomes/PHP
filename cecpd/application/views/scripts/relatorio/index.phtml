@@ -1,0 +1,45 @@
+<div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#relFilial').click(function(){
+            $.ajax({type:'post',url:'<?php echo $this->url(array('controller'=>'Relatorio','action'=>'relfilialajax'));?>',dataType:'html',success:function(r)
+                {
+                    $('#relatorio').html(r)
+                }
+            });
+        });
+         $('#relEquip').click(function(){
+            $.ajax({type:'post',url:'<?php echo $this->url(array('controller'=>'Relatorio','action'=>'relequipajax'));?>',dataType:'html',success:function(r)
+                {
+                    $('#relatorio').html(r)
+                }
+            });
+        });
+        $('#relTecnico').click(function(){
+            $.ajax({type:'post',url:'<?php echo $this->url(array('controller'=>'Relatorio','action'=>'reltecnicoajax'));?>',dataType:'html',success:function(r)
+                {
+                    $('#relatorio').html(r)
+                }
+            });
+        });
+    });
+</script>
+    <h3>Saida de Equipamento a partir de 16/03/2013</h3>
+    
+    <button id="relFilial"> Saida Por Filial</button>
+    <button id="relEquip"> Saida Por Equipamento</button>
+    <button id="relTecnico">Saida Por Tecnico</button>
+    
+
+</div>
+<div id="relatorio"></div>
+<div>
+    <?php 
+    
+           foreach ($this->relEquip as $equip){
+               
+               echo "Equipamento: ".$equip['equipnome']." Quantidade: ".$equip['quantidade']."<br>";
+           }
+    
+    ?>
+</div>

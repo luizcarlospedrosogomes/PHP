@@ -1,0 +1,15 @@
+<?php //var_dump($this->filial['retval']) ?>
+
+     <?php 
+             foreach ($this->filial['retval'] as $fl)
+             {
+                 //var_dump($fl);
+                echo "<p>Filial: ".$fl['filial']."</p> Equipamentos: ";
+    
+                 foreach ($fl['itens'] as $equip){
+                     
+                     echo $equip." - ";
+                 }
+               
+             }
+    ?>

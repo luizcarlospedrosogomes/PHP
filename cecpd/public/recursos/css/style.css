@@ -1,0 +1,10 @@
+*{padding:0;margin:0;}
+small{font-size:12px; font-weight:bold;color:#333;}
+#galeria{background-color:#fff;position: relative;width:720px;margin:25px auto;padding:10px;text-align:center;}
+a.thumb img{background-color:#fff;border: 1px solid #999;padding:3px;}
+a.thumb span{position: absolute;background-color: #000;padding: 10px;left: -10000px;visibility: hidden;color: black;text-decoration: none;}
+a.thumb:active span{visibility: visible;top: 50px;left: 120px;z-index: 50;}
+
+/*esta parte não faz parte da galeria, apenas estiliza o texto acima da mesma.*/
+p{width:730px;margin:25px auto;font:bold 18px "Trebuchet MS", Tahoma;word-spacing:5px;color:#6D8BAF;text-align:center;border: 1px solid #DFEEFF;padding:7px;}
+a{color:#000;}

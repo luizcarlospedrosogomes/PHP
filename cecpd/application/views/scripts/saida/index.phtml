@@ -1,0 +1,105 @@
+<?php foreach ($this->liste as $ls){
+//var_dump($ls);
+    
+}?>
+
+<div id=""></div>
+    <button id="geraOS">Gerar Ordem de Serviço</button>
+        <script type="text/javascript">
+       $(document).ready(function() {	
+	$('#enviados').click(function(){
+	$.ajax({type :'post',url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'listaenviados')); ?>',data : 'situacao='+$('#situacaoEnviado').val(),	dataType :'html',success :function(resposta)
+                    {
+                        $('.status').html(resposta);
+                    }
+		});
+          });
+           
+      $('#pendentes').click(function(){
+	$.ajax({type :'post',url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'listaenviados')); ?>',data : 'situacao='+$('#situacaoPendente').val(),	dataType :'html',success :function(resposta)
+                    {
+                        $('.status').html(resposta);
+                    }
+		});
+	});
+       $('#aguardandoNF').click(function(){
+	$.ajax({type :'post',url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'listaenviados')); ?>',data : 'situacao='+$('#situacaoaguardandoNF').val(),	dataType :'html',success :function(resposta)
+                    {
+                        $('.status').html(resposta);
+                    }
+		});
+	});
+
+         $(function() {
+             var availableTags = [<?php foreach ($this->equipamento as $marca){
+                 echo '"'.$marca['marca'].'",';
+             } ?>];
+             $( "#marca" ).autocomplete({
+            source: availableTags
+            });
+        }); 
+        $(function() {
+             var availableTags = [<?php foreach ($this->filiais as $fl){
+                 echo '"'.$fl['numero'].'-'.$fl['nome'].'",';
+             } ?>];
+             $( "#filial" ).autocomplete({
+            source: availableTags
+            });
+        });
+        
+}); 
+
+</script>
+    
+    <button id="enviados">Enviados</button>
+    <input type="hidden" value="3" name="situacao" id="situacaoEnviado"/>
+    
+    <button id="pendentes">Pendentes</button>
+    <input type="hidden" value="1" name="situacao" id="situacaoPendente"/>
+    
+     <button id="aguardandoNF">Aguardando Nota Fiscal</button>
+    <input type="hidden" value="2" name="situacao" id="situacaoaguardandoNF"/>
+
+
+
+<div class="status"></div>
+
+<form  class="modal" id="geraOSForm" title="Gerar Ordem de Servico" method="post" action="<?php echo $this->url(array('controller'=>'Saida','action'=>'geraos'));?>">
+    
+    <label for="filial">Filial</label>
+    <input type="text" id="filial" name="filial" required="required"/>
+    
+    
+    <label for="centroDeCusto">Centro de Custo        </label><span><a href="link" target="_blank">Qual ??</a></span>
+    <input type="number" id="centroDeCusto" name="centroDeCusto"/>
+    
+   <label>Equipamento</label>
+    <select name="equipamento">Equipamento
+        <?php foreach($this->equipamento as $obj){?>
+        <option value="<?php  echo $obj['id'] ?>"><?php echo $obj['nome'] ?></option>
+         <?php }?>
+    </select><br>
+    
+    <label for="marca">Marca/Modelo</label>
+    <input type="text" id="marca" name="marca"/>
+    
+    <label for="quantidade">Quantidade</label>
+    <input type="number" id="quantidade" name="quantidade" required="required"/>
+    
+    
+    <label for="obs">OBS</label><br>
+    <textarea  id="obs"cols="15" rows="3" name="obs"></textarea>
+    
+    <input type="submit" value="Gerar O.S."/>
+    
+   
+</form>
+
+
+<div id="ordemPendentes">
+       
+    <div id="editar" class="modal"></div>				
+    
+    
+    <div id="notificacao" class="modal"></div>
+</div>

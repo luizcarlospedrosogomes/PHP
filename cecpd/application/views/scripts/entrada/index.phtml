@@ -1,0 +1,175 @@
+
+    <button id="cadastraForn">Cadastrar Fornecedor</button>
+    <button id="cadastraCat">Cadastrar Categoria</button>
+    <button id="cadastraEquip">Cadastrar Equipamento</button>
+    <button id="cadastraFilial">Cadastrar Filial</button>
+
+<form  class="modal" id="cadFilialForm" title="Cadastrar Filial" method="post" action="<?php echo $this->url(array('controller'=>'Entrada','action'=>'cadfilial'));?>">
+    
+   <label for="num">Numero</label>
+   <input type="text" id="num" name="num"/>
+    
+    <label for="nome">Filial</label>
+    <input type="text" id="nome" name="nome"/>  
+       
+    <input type="submit" value="Cadastrar"/>
+    
+<?php echo $this->erro; ?>
+</form>
+    
+<form  class="modal" id="cadFornForm" title="Cadastrar Fornecedor" method="post" action="<?php echo $this->url(array('controller'=>'Entrada','action'=>'cadforn'));?>">
+    
+    <label for="cnpj">CNPJ</label>
+    <input type="number" id="cnpj" name="cnpj"/>
+    
+    
+    <label for="nome">Empresa</label>
+    <input type="text" id="nome" name="nome"/>
+    
+    <label for="endereco">Endereco</label>
+    <input type="text" id="endereco" name="endereco"/>
+    
+       
+    <input type="submit" value="Cadastrar"/>
+    
+<?php echo $this->erro; ?>
+</form>
+    
+<form  class="modal" id="cadCatForm" title="Cadastrar Categoria" method="post" action="<?php echo $this->url(array('controller'=>'Entrada','action'=>'cadcat'));?>">
+    
+    <label for="cat">Categoria</label>
+    <input type="text" id="cat" name="cat"/>
+          
+    <input type="submit" value="Cadastrar"/>
+    
+<?php echo $this->erro; ?>
+</form>
+
+        
+<form  class="modal" id="cadEquipForm" title="Cadastrar Equipamento" method="post" action="<?php echo $this->url(array('controller'=>'Entrada','action'=>'cadequip'));?>">
+    
+    <label>Categoria</label>
+    <select name="categoria">
+        <?php foreach($this->categoria as $cate){?>
+        <option value="<?php  echo $cate['id'] ?>"><?php echo $cate['nome'] ?></option>
+         <?php }?>
+    </select><br>
+    
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome"/>
+    
+    <label for="marca">Marca</label>
+    <input type="text" id="marca" name="marca"/>
+    
+    <label>Fornecedor</label>
+    <select name="fornecedor">Categoria
+        <?php foreach($this->fornecedor as $forn){?>
+        <option value="<?php  echo $forn['id'] ?>"><?php echo $forn['nome'] ?></option>
+         <?php }?>
+    </select><br>
+    
+    <label for="nf">Nota Fiscal</label>
+    <input type="text" id="nf" name="nf"/>
+    
+    <label for="qtd">Quantidade</label>
+    <input type="number" id="qtd" name="qtd"/>
+    
+    <label for="valor">Valor Unitario</label>
+    <input type="text" name="valor" id="valor"/>
+             
+    <input type="submit" value="Cadastrar"/>
+    
+<?php echo $this->erro; ?>
+</form>
+    
+ <table border="1px">			
+<tr>
+<th>CNPJ</th>
+<th>Nome</th>
+<th>Endereco</th>
+<th>Excluir</th>
+<th>Editar</th>
+</tr>
+<?php foreach ($this->fornecedor as $ls)
+			{//var_dump($ls)?>
+<script type="text/javascript">
+       $(document).ready(function() {	
+	$('#editar<?php echo $ls['id']?>').click(function(){
+	//alert('ok');
+		$('#editar').dialog('open').dialog({
+			width:"20%"
+		});
+
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'editarforn')); ?>',
+			data : 'id='+$('#id<?php echo $ls['id'];?>').val(),
+			dataType :'html',
+			success :function(resposta){
+				
+				$('#editar').html(resposta);
+			}
+				});
+
+		});	
+});
+</script>
+<tr>
+<td><?php if(isset($ls['cnpj'])){ echo $ls['cnpj'];}?></td>
+<td><?php if(isset($ls['nome'])){ echo $ls['nome'];}?></td>
+<td><?php if(isset($ls['cidade'])){ echo $ls['cidade'];}?></td>
+
+<td><?php if(isset($ls['id'])){echo '<a href='.$this->url(array('controller'=>'Entrada','action'=>'excluir','id'=>$ls['id'])).'>Excluir</a>'; }?></td>
+
+<td><button id="editar<?php echo $ls['id']?>">Editar</button></td>
+
+<input type="hidden" name="id" value="<?php echo $ls['id']?>" id="id<?php echo $ls['_id']?>"/>	
+<?php }?>
+</tr>
+</table>
+    
+<script type="text/javascript">
+       $(document).ready(function() {	
+	$('#listarEquip').click(function(){
+	//alert('ok');
+		$('#equip').dialog('open').dialog({
+			width:"40%"
+		});
+
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'listaequip')); ?>',
+			data : 'ola',
+                        dataType :'html',
+			success :function(resposta){
+				
+				$('#liste').html(resposta);
+			}
+				});
+
+		});	
+        $('#listarFilial').click(function(){
+	//alert('ok');
+		$('#equip').dialog('open').dialog({
+			width:"40%"
+		});
+
+		$.ajax({
+			type :'post',
+			url :'<?php echo $this->url(array('controller'=>'Ajax','action'=>'listafilial')); ?>',
+			data : 'ola',
+                        dataType :'html',
+			success :function(resposta){
+				
+				$('#liste').html(resposta);
+			}
+				});
+
+		});	
+});
+</script>
+
+<button id="listarEquip">Equipamentos</button>
+<button id="listarFilial">Filiais</button>
+ <div id="liste"></div>
+ <div id="liste_filial"></div>

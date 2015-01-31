@@ -1,0 +1,21 @@
+<table border="1px">			
+<tr>
+<th>Cateroria</th>
+<th>Equipamento</th>
+<th>Fornecedor</th>
+<th>Excluir</th>
+
+</tr>
+<?php foreach ($this->equip as $ls)
+{//var_dump($ls)?>
+<tr>
+<td><?php if(isset($ls['catnome'])){ echo $ls['catnome'];}?></td>
+<td><?php if(isset($ls['equipnome'])){ echo $ls['equipnome'];}?></td>
+<td><?php if(isset($ls['fornnome'])){ echo $ls['fornnome'];}?></td>
+
+<td><?php if(isset($ls['idequip'])){echo '<a href='.$this->url(array('controller'=>'Ajax','action'=>'excluirequip','id'=>$ls['idequip'])).'>Excluir</a>'; }?></td>
+
+<?php }?>
+</tr>
+</table>
+ 

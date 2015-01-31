@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	
+	<title><?php echo $this->titulo;?></title>
+	
+<!--<script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/jquery-1.9.1.min.js')?>"></script> 
+       <script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/jquery-1.7.1.js')?>"></script>
+<link rel="stylesheet" href="<?php echo $this->baseUrl('recursos/js/ui/css/smoothness/jquery-ui-1.9.0.custom.css')?>" type="text/css" media="all">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"> </script>
+
+            
+        <!-- JAVASCRIPT-->
+       <script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/jquery-1.9.1.min.js')?>"></script> 
+       <script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/jquery-1.7.1.js')?>"></script>
+    <!--   <script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/ui/js/jquery-ui-1.9.0.custom.min.js')?>"></script>-->
+        <link rel="stylesheet" href="<?php echo $this->baseUrl('recursos/js/jquery-ui.css');?>" />
+        <script src="<?php echo $this->baseUrl('recursos/js/jquery-1.9.1.js');?>"></script>
+        <script src="<?php echo $this->baseUrl('recursos/js/jquery-ui.js');?>"></script>
+
+       <link href="<?php echo $this->baseUrl('recursos/css/estilo.css')?>" rel="stylesheet" type="text/css"/>
+      
+		<script type="text/javascript" src="<?php echo $this->baseUrl('recursos/js/script.js')?>"></script>        	
+</head>
+
+<body>
+
+<nav> 
+	   
+  <ul>
+	<li><a href="<?php echo $this->url(array('controller'=>'index','action'=>'index')); ?>">Estoque</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'entrada','action'=>'index')); ?>">Entrada</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'saida','action'=>'index')); ?>">Saida</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'relatorio','action'=>'index')); ?>">Relatorio</a></li>
+	<li><a href="<?php echo $this->url(array('controller'=>'pendencias','action'=>'index')); ?>">Pendencias</a></li>
+  </ul>
+</nav>
+ <span id="logout">
+    <?php $pega = Zend_Auth::getInstance()->getIdentity();
+           if(isset($pega->usuario)){echo "Ola ". ucfirst($pega->usuario)." para sair. ";  ?>     
+     <a href="<?php echo $this->url(array('controller'=>'Login','action'=>'logout')); ?>">Clique aqui!</a>
+ </span>
+
+<?php }?>
+    
+    <h1><?php echo $this->h1?></h1>
+	<?php echo $this->layout()->content; ?>
+
+
+por Luiz Carlos Pedroso Gomes
+</body>
+</html>
